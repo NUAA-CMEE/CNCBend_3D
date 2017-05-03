@@ -1,0 +1,811 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1095</width>
+    <height>703</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>1</horstretch>
+    <verstretch>1</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_8">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QTreeWidget" name="treeWidget">
+       <property name="contextMenuPolicy">
+        <enum>Qt::CustomContextMenu</enum>
+       </property>
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
+      </widget>
+      <widget class="QSplitter" name="splitter_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QSplitter" name="splitter_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="QWidget" name="widget_3" native="true">
+         <property name="styleSheet">
+          <string notr="true">background-color:rgb(255,255,255)</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3"/>
+        </widget>
+        <widget class="QWidget" name="widget_4" native="true">
+         <property name="styleSheet">
+          <string notr="true">background-color:rgb(255,255,255)</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QSplitter" name="splitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="QWidget" name="widget" native="true">
+         <property name="styleSheet">
+          <string notr="true">background-color:rgb(255,255,255)</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6"/>
+        </widget>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="1" column="0">
+           <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0,0,0">
+            <item row="1" column="0">
+             <widget class="QPushButton" name="bend_btn">
+              <property name="text">
+               <string>折弯</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="deploy_btn">
+              <property name="text">
+               <string>展开</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QPushButton" name="reset_btn">
+              <property name="text">
+               <string>重置</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QPushButton" name="up_btn">
+              <property name="text">
+               <string>上移</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QPushButton" name="down_btn">
+              <property name="text">
+               <string>下移</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2" colspan="3">
+             <widget class="QPushButton" name="reverse_btn">
+              <property name="text">
+               <string>调头</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2" colspan="3">
+             <widget class="QPushButton" name="del_btn">
+              <property name="text">
+               <string>删除</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QPushButton" name="cancel_btn">
+              <property name="text">
+               <string>取消</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="2" colspan="3">
+             <widget class="QPushButton" name="sure_btn">
+              <property name="text">
+               <string>应用</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>选择模具：</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1" colspan="4">
+             <widget class="QComboBox" name="comboBox">
+              <property name="currentText">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" rowspan="2" colspan="5">
+             <widget class="QListWidget" name="listWidget">
+              <property name="acceptDrops">
+               <bool>true</bool>
+              </property>
+              <property name="dragEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="dragDropOverwriteMode">
+               <bool>false</bool>
+              </property>
+              <property name="dragDropMode">
+               <enum>QAbstractItemView::InternalMove</enum>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::ContiguousSelection</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="widget_6" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>165</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="bend_all">
+           <property name="text">
+            <string>全部折弯</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="deploy_all">
+           <property name="text">
+            <string>全部展开</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="bend_btn_2">
+           <property name="text">
+            <string>折弯</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="deploy_btn_2">
+           <property name="text">
+            <string>展开</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="return_btn">
+           <property name="text">
+            <string>调头</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="mainView_btn">
+           <property name="text">
+            <string>主视图</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="topView_btn">
+           <property name="text">
+            <string>俯视图</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="sideView_btn">
+           <property name="text">
+            <string>侧视图</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="axisSide_btn">
+           <property name="text">
+            <string>轴侧图</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resource.qrc">
+             <normaloff>:/images/resource/Micon.PNG</normaloff>:/images/resource/Micon.PNG</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="axis_beside_btn">
+           <property name="text">
+            <string>轴侧</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="widget_5" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QRadioButton" name="y_btn">
+             <property name="text">
+              <string>Y轴开口</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QSlider" name="slider">
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="x1_btn">
+             <property name="text">
+              <string>X1轴</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="x2_btn">
+             <property name="text">
+              <string>X2轴</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="x1_back_btn">
+             <property name="text">
+              <string>X1退让</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="x2_back_btn">
+             <property name="text">
+              <string>X2退让</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="r1_btn">
+             <property name="text">
+              <string>R1轴</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="r2_btn">
+             <property name="text">
+              <string>R2轴</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="z1_btn">
+             <property name="text">
+              <string>Z1轴</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="z2_btn">
+             <property name="text">
+              <string>Z2轴</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="pos_label">
+             <property name="styleSheet">
+              <string notr="true">color:red</string>
+             </property>
+             <property name="text">
+              <string>目标位置</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="pos_edit">
+             <property name="text">
+              <string>0.00</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_3">
+             <property name="styleSheet">
+              <string notr="true">color:red</string>
+             </property>
+             <property name="text">
+              <string>mm</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="inter_tag">
+             <property name="text">
+              <string>检测碰撞开关</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="inter_label">
+             <property name="text">
+              <string>当前无干涉</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="before_btn">
+             <property name="text">
+              <string>上一道</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="next_btn">
+             <property name="text">
+              <string>下一道</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1095</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>文件(&amp;F)</string>
+    </property>
+    <addaction name="New"/>
+    <addaction name="Open"/>
+    <addaction name="Save"/>
+    <addaction name="Print"/>
+    <addaction name="close_window"/>
+    <addaction name="Quit"/>
+   </widget>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>帮助(&amp;H)</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_L">
+    <property name="title">
+     <string>机床(&amp;M)</string>
+    </property>
+    <widget class="QMenu" name="body">
+     <property name="title">
+      <string>本体(&amp;B)</string>
+     </property>
+     <addaction name="MB8_100X4200"/>
+     <addaction name="MB8_100X3200"/>
+     <addaction name="MB6_100X2800"/>
+    </widget>
+    <addaction name="body"/>
+    <addaction name="Punch"/>
+    <addaction name="Die"/>
+    <addaction name="BackGaung"/>
+    <addaction name="ToolConfig"/>
+    <addaction name="Constant"/>
+   </widget>
+   <widget class="QMenu" name="menu_T">
+    <property name="title">
+     <string>操作(&amp;O)</string>
+    </property>
+    <addaction name="Bend"/>
+    <addaction name="Deploy"/>
+    <addaction name="Return"/>
+    <addaction name="bend_order"/>
+    <addaction name="separator"/>
+    <addaction name="enLarge"/>
+    <addaction name="shrink"/>
+    <addaction name="reset"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>编程(&amp;P)</string>
+    </property>
+    <addaction name="NC"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>仿真(&amp;E)</string>
+    </property>
+    <addaction name="Auto"/>
+    <addaction name="RealTime"/>
+   </widget>
+   <widget class="QMenu" name="menuFu">
+    <property name="title">
+     <string>服务器(&amp;S)</string>
+    </property>
+    <addaction name="Link"/>
+    <addaction name="Transfer"/>
+   </widget>
+   <widget class="QMenu" name="menuXian">
+    <property name="title">
+     <string>显示(&amp;D)</string>
+    </property>
+    <addaction name="Body_Show"/>
+    <addaction name="Punch_Show"/>
+    <addaction name="Die_Show"/>
+    <addaction name="X_Show"/>
+    <addaction name="R_Show"/>
+    <addaction name="Z_Show"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menu_L"/>
+   <addaction name="menu_T"/>
+   <addaction name="menuXian"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_2"/>
+   <addaction name="menuFu"/>
+   <addaction name="menu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="Open"/>
+   <addaction name="ToolConfig"/>
+   <addaction name="MB8_100X4200"/>
+   <addaction name="show_or_not"/>
+   <addaction name="Auto"/>
+   <addaction name="bend_order"/>
+   <addaction name="NC"/>
+   <addaction name="Link"/>
+   <addaction name="Transfer"/>
+   <addaction name="separator"/>
+   <addaction name="Return"/>
+   <addaction name="separator"/>
+   <addaction name="enLarge"/>
+   <addaction name="shrink"/>
+   <addaction name="reset"/>
+   <addaction name="separator"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="New">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/new.png</normaloff>:/images/resource/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>新建(&amp;N)</string>
+   </property>
+  </action>
+  <action name="Open">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/folder-new.png</normaloff>:/images/resource/folder-new.png</iconset>
+   </property>
+   <property name="text">
+    <string>打开(&amp;O)</string>
+   </property>
+  </action>
+  <action name="Quit">
+   <property name="text">
+    <string>退出(&amp;Q)</string>
+   </property>
+  </action>
+  <action name="Punch">
+   <property name="text">
+    <string>上模(&amp;P)</string>
+   </property>
+  </action>
+  <action name="Die">
+   <property name="text">
+    <string>下模(&amp;D)</string>
+   </property>
+  </action>
+  <action name="Bend">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/bend.png</normaloff>:/images/resource/bend.png</iconset>
+   </property>
+   <property name="text">
+    <string>折弯(&amp;B)</string>
+   </property>
+  </action>
+  <action name="Deploy">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/deploy.png</normaloff>:/images/resource/deploy.png</iconset>
+   </property>
+   <property name="text">
+    <string>展开(&amp;D)</string>
+   </property>
+  </action>
+  <action name="Save">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/save.png</normaloff>:/images/resource/save.png</iconset>
+   </property>
+   <property name="text">
+    <string>保存((&amp;S))</string>
+   </property>
+  </action>
+  <action name="Print">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/h16.png</normaloff>:/images/resource/h16.png</iconset>
+   </property>
+   <property name="text">
+    <string>打印((&amp;P))</string>
+   </property>
+  </action>
+  <action name="Machine">
+   <property name="text">
+    <string>机床(&amp;M)</string>
+   </property>
+  </action>
+  <action name="Auto">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/compute.png</normaloff>:/images/resource/compute.png</iconset>
+   </property>
+   <property name="text">
+    <string>自动计算(&amp;A)</string>
+   </property>
+  </action>
+  <action name="Return">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/return.jpg</normaloff>:/images/resource/return.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>调头(&amp;R)</string>
+   </property>
+  </action>
+  <action name="BackGaung">
+   <property name="text">
+    <string>轴配置(&amp;A)</string>
+   </property>
+  </action>
+  <action name="MB8_100X4200">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/machine</normaloff>:/images/machine</iconset>
+   </property>
+   <property name="text">
+    <string>MB8-100X4200</string>
+   </property>
+  </action>
+  <action name="MB8_100X3200">
+   <property name="text">
+    <string>MB8-100X3200</string>
+   </property>
+  </action>
+  <action name="MB6_100X2800">
+   <property name="text">
+    <string>MB6-100X2800</string>
+   </property>
+  </action>
+  <action name="enLarge">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/zoom-in.png</normaloff>:/images/resource/zoom-in.png</iconset>
+   </property>
+   <property name="text">
+    <string>放大(&amp;E)</string>
+   </property>
+  </action>
+  <action name="shrink">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/zoom-out.png</normaloff>:/images/resource/zoom-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>缩小(&amp;S)</string>
+   </property>
+  </action>
+  <action name="reset">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/zoom-original.png</normaloff>:/images/resource/zoom-original.png</iconset>
+   </property>
+   <property name="text">
+    <string>重定位(&amp;R)</string>
+   </property>
+  </action>
+  <action name="NC">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/code</normaloff>:/images/code</iconset>
+   </property>
+   <property name="text">
+    <string>NC代码(&amp;N)</string>
+   </property>
+   <property name="toolTip">
+    <string>生成NC代码(N)</string>
+   </property>
+  </action>
+  <action name="Link">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/link</normaloff>:/images/link</iconset>
+   </property>
+   <property name="text">
+    <string>连接(&amp;L)</string>
+   </property>
+  </action>
+  <action name="Transfer">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/transfer</normaloff>:/images/transfer</iconset>
+   </property>
+   <property name="text">
+    <string>文件传输(&amp;T)</string>
+   </property>
+  </action>
+  <action name="RealTime">
+   <property name="text">
+    <string>实时仿真(&amp;R)</string>
+   </property>
+  </action>
+  <action name="Body_Show">
+   <property name="text">
+    <string>本体</string>
+   </property>
+   <property name="toolTip">
+    <string>隐藏/显示本体</string>
+   </property>
+  </action>
+  <action name="Punch_Show">
+   <property name="text">
+    <string>上模(&amp;P)</string>
+   </property>
+  </action>
+  <action name="Die_Show">
+   <property name="text">
+    <string>下模(&amp;D)</string>
+   </property>
+  </action>
+  <action name="X_Show">
+   <property name="text">
+    <string>挡料-X轴(&amp;X)</string>
+   </property>
+  </action>
+  <action name="ToolConfig">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/gtk-execute.png</normaloff>:/images/resource/gtk-execute.png</iconset>
+   </property>
+   <property name="text">
+    <string>模具配置(&amp;C)</string>
+   </property>
+  </action>
+  <action name="R_Show">
+   <property name="text">
+    <string>挡料-R轴(&amp;R)</string>
+   </property>
+  </action>
+  <action name="Z_Show">
+   <property name="text">
+    <string>挡料-Z轴(&amp;Z)</string>
+   </property>
+  </action>
+  <action name="Constant">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/machine</normaloff>:/images/machine</iconset>
+   </property>
+   <property name="text">
+    <string>机床参数(&amp;P)</string>
+   </property>
+  </action>
+  <action name="bend_order">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/order</normaloff>:/images/order</iconset>
+   </property>
+   <property name="text">
+    <string>折弯工序</string>
+   </property>
+  </action>
+  <action name="close_window">
+   <property name="text">
+    <string>关闭当前窗口(&amp;C)</string>
+   </property>
+  </action>
+  <action name="show_or_not">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/images/resource/top.png</normaloff>:/images/resource/top.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示/隐藏机床</string>
+   </property>
+   <property name="toolTip">
+    <string>显示/隐藏机床</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>
