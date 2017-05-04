@@ -24,7 +24,7 @@ uiBendOrderPage::uiBendOrderPage(QWidget *parent, bend_surface *pbend, bend_orde
     ui->splitter->setStretchFactor(0,1);
     ui->splitter->setStretchFactor(1,1);
     pDeploy = new uiDeployPage(pWidget);
-    pDeploy->setShowData(pbend,porder);
+//    pDeploy->setShowData(pbend,porder);
     int width = pWidget->width();
     int heigth = pWidget->height();
     pDeploy->resizeWindow(width,heigth);

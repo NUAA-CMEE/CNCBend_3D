@@ -21,6 +21,7 @@ uiDeployPage::uiDeployPage(QWidget *parent) :
     vMove = 0.0;
     mouse_x = 0;
     mouse_y = 0;
+    K = 1;
 }
 
 uiDeployPage::~uiDeployPage()
@@ -32,6 +33,19 @@ void uiDeployPage::setShowData(bend_surface *pbend, bend_order *porder)
     pBendHead = pbend;
     pOrderHead = porder;
     update();
+}
+
+/********************************************
+ *function:从外部获得钣金件基面的最大轮廓长度
+ *input:钣金基面长度
+ *output:无
+ *adding:
+ *author: wang
+ *date: 2017年5月4日10:53:39
+ *******************************************/
+void uiDeployPage::getMaxLengthOfBasicsurface(float length)
+{
+    maxLength = length;
 }
 
 void uiDeployPage::resizeWindow(int width, int height)
@@ -94,6 +108,12 @@ void uiDeployPage::paintEvent(QPaintEvent *e)
     iHeight = e->rect().height();
     zoom = 200.0/iWidth + 400.0/iHeight;
     QPainter painter(this);
+    if(maxLength<100)
+    {
+        K = 50/maxLength; //根据钣金基面最大长度确定二维展开图的缩放比例K
+    }
+    else
+        K = 1;
     QPixmap *pixMap = drawPix();
     QRect target(0,0,iWidth,iHeight);
     QRect source(0,0,iWidth,iHeight);
@@ -124,18 +144,18 @@ QPixmap *uiDeployPage::drawPix()
             pbend = pbend->pNext;
         }
         line_type *pbendline = pbend->pBendLine;
-        float start_x = pbendline->start.x/zoom;
-        float end_x = pbendline->end.x/zoom;
-        float start_y = pbendline->start.z/zoom;
-        float end_y = pbendline->end.z/zoom;
+        float start_x = K*pbendline->start.x/zoom;
+        float end_x = K*pbendline->end.x/zoom;
+        float start_y = K*pbendline->start.z/zoom;
+        float end_y = K*pbendline->end.z/zoom;
         QPen pen1(Qt::red,1,Qt::DotLine);
         painter.setPen(pen1);
         painter.drawLine(start_x,start_y,end_x,end_y);
         if(bManualState == false)
         {
             painter.scale(1,-1);    //文字方向需要变换
-            int pos_x = (pbendline->start.x+pbendline->end.x)/(2*zoom);
-            int pos_y = (pbendline->start.z+pbendline->end.z)/(2*zoom);
+            int pos_x = K*(pbendline->start.x+pbendline->end.x)/(2*zoom);
+            int pos_y = K*(pbendline->start.z+pbendline->end.z)/(2*zoom);
             painter.drawText(QPoint(pos_x-3,-pos_y+5),tr("%1").arg(porder->bend_id));
             painter.setMatrix(QMatrix(1,0,0,-1,iWidth/2,iHeight/2));
         }
@@ -151,8 +171,8 @@ QPixmap *uiDeployPage::drawPix()
                     painter.setPen(pen2);
                     painter.drawLine(start_x,start_y,end_x,end_y);
                     painter.scale(1,-1);    //文字方向需要变换
-                    int pos_x = (pbendline->start.x+pbendline->end.x)/(2*zoom);
-                    int pos_y = (pbendline->start.z+pbendline->end.z)/(2*zoom);
+                    int pos_x = K*(pbendline->start.x+pbendline->end.x)/(2*zoom);
+                    int pos_y = K*(pbendline->start.z+pbendline->end.z)/(2*zoom);
                     painter.drawText(QPoint(pos_x-3,-pos_y+5),tr("%1").arg(i+1));
                     painter.setMatrix(QMatrix(1,0,0,-1,iWidth/2,iHeight/2));
                     break;
@@ -189,8 +209,8 @@ QPixmap *uiDeployPage::drawPix()
                     painter.setPen(pen2);
                     painter.drawLine(start_x,start_y,end_x,end_y);
                     painter.scale(1,-1);    //文字方向需要变换
-                    int pos_x = (pbendline->start.x+pbendline->end.x)/(2*zoom);
-                    int pos_y = (pbendline->start.z+pbendline->end.z)/(2*zoom);
+                    int pos_x = K*(pbendline->start.x+pbendline->end.x)/(2*zoom);
+                    int pos_y = K*(pbendline->start.z+pbendline->end.z)/(2*zoom);
                     painter.drawText(QPoint(pos_x-3,-pos_y+5),tr("%1").arg(ManualOrder.size()));
                     painter.setMatrix(QMatrix(1,0,0,-1,iWidth/2,iHeight/2));
                     emit sendSelectInfo(porder->bendpoint);
@@ -201,8 +221,8 @@ QPixmap *uiDeployPage::drawPix()
         QPen pen2(Qt::black,1,Qt::SolidLine);
         painter.setPen(pen2);
         QVector<point3f> point = pbend->pDeploy->point;
-        painter.drawLine(point[0].x/zoom,point[0].z/zoom,point[3].x/zoom,point[3].z/zoom);
-        painter.drawLine(point[1].x/zoom,point[1].z/zoom,point[2].x/zoom,point[2].z/zoom);
+        painter.drawLine(K*point[0].x/zoom,K*point[0].z/zoom,K*point[3].x/zoom,K*point[3].z/zoom);
+        painter.drawLine(K*point[1].x/zoom,K*point[1].z/zoom,K*point[2].x/zoom,K*point[2].z/zoom);
         basic_surface *pleft = pbend->pLeftBase;
         basic_surface *pright = pbend->pRightBase;
         if(pleft->isVisited == 0)
@@ -235,8 +255,8 @@ void uiDeployPage::drawBasicSurface(QPainter *painter, basic_surface *pBasic)
                 line_type *pline = (line_type *)pSurface->pOutlines[i][j];
                 if(pline->isBendBound)
                     continue;
-                painter->drawLine(pline->start.x/zoom,pline->start.z/zoom,\
-                                 pline->end.x/zoom,pline->end.z/zoom);
+                painter->drawLine(K*pline->start.x/zoom,K*pline->start.z/zoom,\
+                                 K*pline->end.x/zoom,K*pline->end.z/zoom);
             }
             else if(100 == type){
                 arc_type *pArc = (arc_type *)pSurface->pOutlines[i][j];
@@ -250,18 +270,18 @@ void uiDeployPage::drawBasicSurface(QPainter *painter, basic_surface *pBasic)
                 float *data = pNurbsCurve->pCtlarray;
                 if(num == 1) //说明只有两个控制点
                 {
-                    painter->drawLine(data[0]/zoom,data[2]/zoom,\
-                            data[3]/zoom,data[5]/zoom);
+                    painter->drawLine(K*data[0]/zoom,K*data[2]/zoom,\
+                            K*data[3]/zoom,K*data[5]/zoom);
                 }
                 else
                 {
                     //painter.setRenderHint(QPainter::Antialiasing,true);
                     QPainterPath path;
-                    path.moveTo(data[0]/zoom,data[2]/zoom);
+                    path.moveTo(K*data[0]/zoom,K*data[2]/zoom);
                     for(int m = 1; m < num-2; m++)
                     {
-                        path.cubicTo(data[3*m+3]/zoom,data[3*m+5]/zoom,data[3*m+6]/zoom,\
-                                data[3*m+8]/zoom,data[3*m+9]/zoom,data[3*m+11]/zoom);
+                        path.cubicTo(K*data[3*m+3]/zoom,K*data[3*m+5]/zoom,K*data[3*m+6]/zoom,\
+                                K*data[3*m+8]/zoom,K*data[3*m+9]/zoom,K*data[3*m+11]/zoom);
                     }
                     painter->drawPath(path);
                     //painter.setRenderHint(QPainter::Antialiasing,false);

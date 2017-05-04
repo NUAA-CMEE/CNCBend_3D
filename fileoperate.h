@@ -62,6 +62,7 @@ public:
     point3f findBasicData(bool);
     point3f findBackBasicData(bool isbendDataFlow);
     void adjustWorkpiece(xform_type rotateMatrix, bool flag);
+    float findBsicSurfaceMaxLength();
 
     void ManualCancel(int index);
     void ManualSure(int index);

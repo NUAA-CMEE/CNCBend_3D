@@ -164,7 +164,7 @@ void bendGLWidget::setShowModel(fileOperate *pData)
         normalVector.z = backCenter.z - frontCeneter.z;
         qDebug()<<"法向量坐标：X"<<normalVector.x<<"  Y"<<normalVector.y<<"  Z"<<normalVector.z;
         /*****************************根据求得的法向量来变换钣金件，使得平行于地面**********************/
-        if(normalVector.z > 0)
+        if(normalVector.z > 0.5)
         {
             //绕X轴旋转-90度
             xform_type rotateMatrix;
@@ -182,7 +182,7 @@ void bendGLWidget::setShowModel(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,true);
         }
-        else if(normalVector.z < 0)
+        else if(normalVector.z < -0.5)
         {
             //绕x轴旋转90度
             xform_type rotateMatrix;
@@ -200,7 +200,7 @@ void bendGLWidget::setShowModel(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,true);
         }
-        else if(normalVector.x > 0)
+        else if(normalVector.x > 0.5)
         {
             //绕z轴旋转90度
             xform_type rotateMatrix;
@@ -218,7 +218,7 @@ void bendGLWidget::setShowModel(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,true);
         }
-        else if(normalVector.x < 0)
+        else if(normalVector.x < -0.5)
         {
             //绕z轴旋转-90度
             xform_type rotateMatrix;
@@ -236,7 +236,7 @@ void bendGLWidget::setShowModel(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,true);
         }
-        else if(normalVector.y < 0)
+        else if(normalVector.y < -0.5)
         {
             //绕x轴旋转180度
             xform_type rotateMatrix;
@@ -254,7 +254,7 @@ void bendGLWidget::setShowModel(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,true);
         }
-        else if(normalVector.y > 0)
+        else if(normalVector.y > 0.5)
         {
             //是想要的姿态，do nothing
         }
@@ -425,7 +425,7 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
         normalVector.z = backCenter.z - frontCeneter.z;
         qDebug()<<"法向量坐标：X"<<normalVector.x<<"  Y"<<normalVector.y<<"  Z"<<normalVector.z;
         /*****************************根据求得的法向量来变换钣金件，使得平行于地面**********************/
-        if(normalVector.z > 0)
+        if(normalVector.z > 0.5)
         {
             //绕X轴旋转-90度
             xform_type rotateMatrix;
@@ -443,7 +443,7 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,false);
         }
-        else if(normalVector.z < 0)
+        else if(normalVector.z < -0.5)
         {
             //绕x轴旋转90度
             xform_type rotateMatrix;
@@ -461,7 +461,7 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,false);
         }
-        else if(normalVector.x > 0)
+        else if(normalVector.x > 0.5)
         {
             //绕z轴旋转90度
             xform_type rotateMatrix;
@@ -479,7 +479,7 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,false);
         }
-        else if(normalVector.x < 0)
+        else if(normalVector.x < -0.5)
         {
             //绕z轴旋转-90度
             xform_type rotateMatrix;
@@ -497,7 +497,7 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,false);
         }
-        else if(normalVector.y < 0)
+        else if(normalVector.y < -0.5)
         {
             //绕x轴旋转180度
             xform_type rotateMatrix;
@@ -515,7 +515,7 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
             rotateMatrix.T3 = 0;
             pDrawData->adjustWorkpiece(rotateMatrix,false);
         }
-        else if(normalVector.y > 0)
+        else if(normalVector.y > 0.5)
         {
             //是想要的姿态，do nothing
         }
@@ -630,7 +630,7 @@ void bendGLWidget::paintGL()
          gluLookAt(ex, ey, ez,0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
          glTranslatef(0.0+hMove,0.0+vMove,0.0+zMove);
-         qDebug()<<"zMove:"<<zMove;
+//         qDebug()<<"zMove:"<<zMove;
 
          glRotatef(xRote,1.0,0.0,0.0);
          glRotatef(yRote,0.0,1.0,0.0);

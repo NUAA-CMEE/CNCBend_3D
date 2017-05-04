@@ -682,6 +682,8 @@ void MainWindow::on_Open_triggered()
         //显示展开图
         bend_surface *pdeploy = pOperate->getWorkPieceModel(select_filepath,true);
         pdeploy = pBendGL->adjustDeployWorkpiece(pOperate);
+        float maxlength = pOperate->findBsicSurfaceMaxLength();
+        pDeploy->getMaxLengthOfBasicsurface(maxlength);
         pDeploy->setShowData(pdeploy,porder);
         updateShowRect();
         //首先将树形图清空
