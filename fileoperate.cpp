@@ -3027,6 +3027,54 @@ void fileOperate::adjustWorkpiece(xform_type rotateMatrix, bool flag)
 }
 
 /********************************************
+ *function:查找基面多边形的最大长度
+ *input:无
+ *output:返回最大长度
+ *adding:
+ *author: wang
+ *date: 2017年5月4日10:18:19
+ *******************************************/
+float fileOperate::findBsicSurfaceMaxLength()
+{
+    bend_surface *pbend = pBendHead;
+    int max = 0;
+    basic_surface *result = NULL;  //要找出的面积最大（数据量最大的基面）
+    while(pbend)
+    {
+        basic_surface *pleft = pbend->pLeftBase;
+        basic_surface *pright = pbend->pRightBase;
+        if(pleft->pBendSurface.size() > max)
+        {
+            max = pleft->pBendSurface.size();
+            result = pleft;
+        }
+        if(pright->pBendSurface.size() > max)
+        {
+            max = pright->pBendSurface.size();
+            result = pright;
+        }
+        pbend = pbend->pNext;
+    }
+
+    trimmed_surface_type *ptmp= result->pSurface;
+    float generalX = 0,generalY = 0,generalZ = 0;
+    float length;
+    float  Maxlength = 0;
+    for(int i = 0; i < ptmp->outlineCount[0]; i++)
+    {
+        line_type *pline = (line_type *)ptmp->pOutlines[0][i];
+        generalX = pline->start.x-pline->end.x;
+        generalY = pline->start.y-pline->end.y;
+        generalZ = pline->start.z-pline->end.z;
+        length = sqrt(generalX*generalX+generalY*generalY+generalZ*generalZ);
+        qDebug()<<"长度: "<<length;
+        if(length > Maxlength)
+            Maxlength = length;
+    }
+    return Maxlength;
+}
+
+/********************************************
  *function:查找当前折弯点对应的折弯顺序
  *adding:
  *author: xu
