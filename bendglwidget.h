@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fileoperate.h"
+#include<math.h>
 
 #define ACCURACY_NUM    50
 #define MAX_SIZE        4096

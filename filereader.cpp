@@ -1765,8 +1765,8 @@ void fileReader::getThickAndRadiusAndAngle(bend_surface *pHead)
             workpiece_thickness = thickness;
             pbend->bendRadius = min_radius;
             pbend->pParallel->bendRadius = min_radius;
-            pbend->bendAngle = angle;
-            pbend->pParallel->bendAngle = angle;
+            pbend->bendAngle = -angle;
+            pbend->pParallel->bendAngle = -angle;
         }
         else
         {
@@ -1774,8 +1774,8 @@ void fileReader::getThickAndRadiusAndAngle(bend_surface *pHead)
             workpiece_thickness = thickness;
             pbend->bendRadius = max_radius;
             pbend->pParallel->bendRadius = max_radius;
-            pbend->bendAngle = -angle;
-            pbend->pParallel->bendAngle = -angle;
+            pbend->bendAngle = angle;
+            pbend->pParallel->bendAngle = angle;
         }
         pbend = pbend->pNext;
     }
