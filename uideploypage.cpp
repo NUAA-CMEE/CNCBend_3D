@@ -106,7 +106,7 @@ void uiDeployPage::paintEvent(QPaintEvent *e)
     e = e;
     iWidth = e->rect().width();
     iHeight = e->rect().height();
-    zoom = 200.0/iWidth + 400.0/iHeight;
+    zoom = 200.0/iWidth + 600.0/iHeight;
     QPainter painter(this);
     if(maxLength<100)
     {
