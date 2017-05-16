@@ -219,11 +219,14 @@ typedef struct bendSurface  //折弯面面实体
     line_type *pBendLine;       //折弯线段
     nurbsSurface_type *pBendSurface;
     trimmed_surface_type *pSurface;//基面的裁剪曲面(旋转曲面)以及轮廓曲线
+
     stu_polygon *pDeploy;    //指向展开平面
     stu_polygon *pSideFont;    //指向展开时的侧面
     stu_polygon *pSideBack;
+
     nurbsSurface_type *pBendSideFont;//指向折弯时的侧面
     nurbsSurface_type *pBendSideBack;
+
     basic_surface *pLeftBase;   //指向其中一个基面
     basic_surface *pRightBase;  //指向另外一个基面
     bendSurface *pNext;         //指向下一个结点

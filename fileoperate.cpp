@@ -2892,7 +2892,7 @@ void fileOperate::deploy_num(int num)
 
 /********************************************
  *function:返回当前位置钣金件的基面中心点
- *input:无
+ *input:标志位 true：折弯数据流    false：展开数据流
  *output:中心点坐标
  *adding:无
  *author: wang
@@ -2910,11 +2910,14 @@ point3f fileOperate::findBasicData(bool isbendDataFlow)
         pbend = pDeployHead;
     }
     int max = 0;
+    int time = 0;
     basic_surface *result = NULL;
     while(pbend)
     {
         basic_surface *pleft = pbend->pLeftBase;
         basic_surface *pright = pbend->pRightBase;
+        time++;
+        qDebug()<<pbend->isTop<<"次数"<<time<<"折弯点序号"<<pbend->bendNum;
         if(pleft->pBendSurface.size() > max)
         {
             max = pleft->pBendSurface.size();
@@ -2958,21 +2961,26 @@ point3f fileOperate::findBasicData(bool isbendDataFlow)
 point3f fileOperate::findBackBasicData(bool isbendDataFlow)
 {
     bend_surface *pbend ;
+    bend_surface *pbend2 ;
     if(isbendDataFlow)
     {
-       pbend = pBendHead->pParallel;
+       pbend = pBendHead;
     }
     else
     {
-        pbend = pDeployHead->pParallel;
+        pbend = pDeployHead;
     }
 
     int max = 0;
+    int time = 0;
     basic_surface *result = NULL;  //要找出的面积最大（数据量最大的基面）
     while(pbend)
     {
-        basic_surface *pleft = pbend->pLeftBase;
-        basic_surface *pright = pbend->pRightBase;
+        pbend2 = pbend->pParallel;
+        basic_surface *pleft = pbend2->pLeftBase;
+        basic_surface *pright = pbend2->pRightBase;
+        time++;
+        qDebug()<<pbend2->isTop<<"次数"<<time<<"折弯点序号"<<pbend2->bendNum;
         if(pleft->pBendSurface.size() > max)
         {
             max = pleft->pBendSurface.size();
@@ -2984,6 +2992,7 @@ point3f fileOperate::findBackBasicData(bool isbendDataFlow)
             result = pright;
         }
         pbend = pbend->pNext;
+
     }
 
     trimmed_surface_type *ptmp= result->pSurface;

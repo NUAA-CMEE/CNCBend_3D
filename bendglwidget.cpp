@@ -153,159 +153,6 @@ void bendGLWidget::resetGraph()
 void bendGLWidget::setShowModel(fileOperate *pData)
 {
     pDrawData = pData;
-    if(isFirstLoad)
-    {
-        /**********************计算垂直于钣金上表面，方向朝外的法向量***************/
-        point3f frontCeneter,backCenter,normalVector;
-        frontCeneter = pDrawData->findBasicData(true);
-        backCenter = pDrawData->findBackBasicData(true);
-        normalVector.x = backCenter.x - frontCeneter.x;
-        normalVector.y = backCenter.y - frontCeneter.y;
-        normalVector.z = backCenter.z - frontCeneter.z;
-        qDebug()<<"法向量坐标：X"<<normalVector.x<<"  Y"<<normalVector.y<<"  Z"<<normalVector.z;
-        /*****************************根据求得的法向量来变换钣金件，使得平行于地面**********************/
-        if(0==normalVector.x && normalVector.y>0 && 0==normalVector.z )
-        {
-
-        }
-        else if(normalVector.x!=0 || normalVector.y!=0 || normalVector.z!=0)
-        {
-            /*先求绕X轴旋转的角度和矩阵*/
-            float RotateXangle = 0 - atan2(normalVector.z,normalVector.y);
-            qDebug()<<"绕X轴旋转的角度：X"<<RotateXangle*180/M_PI;
-            xform_type rotate_X_Matrix;
-            rotate_X_Matrix.R11 = 1;
-            rotate_X_Matrix.R12 = 0;
-            rotate_X_Matrix.R13 = 0;
-            rotate_X_Matrix.R21 = 0;
-            rotate_X_Matrix.R22 = cos(RotateXangle);
-            rotate_X_Matrix.R23 = -sin(RotateXangle);
-            rotate_X_Matrix.R31 = 0;
-            rotate_X_Matrix.R32 = sin(RotateXangle);
-            rotate_X_Matrix.R33 = cos(RotateXangle);
-            rotate_X_Matrix.T1 = 0;
-            rotate_X_Matrix.T2 = 0;
-            rotate_X_Matrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotate_X_Matrix,true);
-
-            /*再求绕Z轴旋转的角度和矩阵*/
-            float length = sqrt(normalVector.y*normalVector.y+normalVector.z*normalVector.z);
-            if(normalVector.y<0)
-                length = -length;
-            float RotateZangle = atan2(normalVector.x,length);
-            qDebug()<<"绕Z轴旋转的角度：Z"<<RotateZangle*180/M_PI;
-            xform_type rotate_Z_Matrix;
-            rotate_Z_Matrix.R11 = cos(RotateZangle);
-            rotate_Z_Matrix.R12 = -sin(RotateZangle);
-            rotate_Z_Matrix.R13 = 0;
-            rotate_Z_Matrix.R21 = sin(RotateZangle);
-            rotate_Z_Matrix.R22 = cos(RotateZangle);
-            rotate_Z_Matrix.R23 = 0;
-            rotate_Z_Matrix.R31 = 0;
-            rotate_Z_Matrix.R32 = 0;
-            rotate_Z_Matrix.R33 = 1;
-            rotate_Z_Matrix.T1 = 0;
-            rotate_Z_Matrix.T2 = 0;
-            rotate_Z_Matrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotate_Z_Matrix,true);
-        }
-
-//         if(normalVector.z > 0.5)
-//        {
-//            //绕X轴旋转-90度
-//            xform_type rotateMatrix;
-//            rotateMatrix.R11 = 1;
-//            rotateMatrix.R12 = 0;
-//            rotateMatrix.R13 = 0;
-//            rotateMatrix.R21 = 0;
-//            rotateMatrix.R22 = 0;
-//            rotateMatrix.R23 = 1;
-//            rotateMatrix.R31 = 0;
-//            rotateMatrix.R32 = -1;
-//            rotateMatrix.R33 = 0;
-//            rotateMatrix.T1 = 0;
-//            rotateMatrix.T2 = 0;
-//            rotateMatrix.T3 = 0;
-//            pDrawData->adjustWorkpiece(rotateMatrix,true);
-//        }
-//        else if(normalVector.z < -0.5)
-//        {
-//            //绕x轴旋转90度
-//            xform_type rotateMatrix;
-//            rotateMatrix.R11 = 1;
-//            rotateMatrix.R12 = 0;
-//            rotateMatrix.R13 = 0;
-//            rotateMatrix.R21 = 0;
-//            rotateMatrix.R22 = 0;
-//            rotateMatrix.R23 = -1;
-//            rotateMatrix.R31 = 0;
-//            rotateMatrix.R32 = 1;
-//            rotateMatrix.R33 = 0;
-//            rotateMatrix.T1 = 0;
-//            rotateMatrix.T2 = 0;
-//            rotateMatrix.T3 = 0;
-//            pDrawData->adjustWorkpiece(rotateMatrix,true);
-//        }
-//        else if(normalVector.x > 0.5)
-//        {
-//            //绕z轴旋转90度
-//            xform_type rotateMatrix;
-//            rotateMatrix.R11 = 0;
-//            rotateMatrix.R12 = -1;
-//            rotateMatrix.R13 = 0;
-//            rotateMatrix.R21 = 1;
-//            rotateMatrix.R22 = 0;
-//            rotateMatrix.R23 = 0;
-//            rotateMatrix.R31 = 0;
-//            rotateMatrix.R32 = 0;
-//            rotateMatrix.R33 = 1;
-//            rotateMatrix.T1 = 0;
-//            rotateMatrix.T2 = 0;
-//            rotateMatrix.T3 = 0;
-//            pDrawData->adjustWorkpiece(rotateMatrix,true);
-//        }
-//        else if(normalVector.x < -0.5)
-//        {
-//            //绕z轴旋转-90度
-//            xform_type rotateMatrix;
-//            rotateMatrix.R11 = 0;
-//            rotateMatrix.R12 = 1;
-//            rotateMatrix.R13 = 0;
-//            rotateMatrix.R21 = -1;
-//            rotateMatrix.R22 = 0;
-//            rotateMatrix.R23 = 0;
-//            rotateMatrix.R31 = 0;
-//            rotateMatrix.R32 = 0;
-//            rotateMatrix.R33 = 1;
-//            rotateMatrix.T1 = 0;
-//            rotateMatrix.T2 = 0;
-//            rotateMatrix.T3 = 0;
-//            pDrawData->adjustWorkpiece(rotateMatrix,true);
-//        }
-//        else if(normalVector.y < -0.5)
-//        {
-//            //绕x轴旋转180度
-//            xform_type rotateMatrix;
-//            rotateMatrix.R11 = 1;
-//            rotateMatrix.R12 = 0;
-//            rotateMatrix.R13 = 0;
-//            rotateMatrix.R21 = 0;
-//            rotateMatrix.R22 = -1;
-//            rotateMatrix.R23 = 0;
-//            rotateMatrix.R31 = 0;
-//            rotateMatrix.R32 = 0;
-//            rotateMatrix.R33 = -1;
-//            rotateMatrix.T1 = 0;
-//            rotateMatrix.T2 = 0;
-//            rotateMatrix.T3 = 0;
-//            pDrawData->adjustWorkpiece(rotateMatrix,true);
-//        }
-//        else if(normalVector.y > 0.5)
-//        {
-//            //是想要的姿态，do nothing
-//        }
-        isFirstLoad = false;
-    }
     updateGL();
 }
 
@@ -462,110 +309,66 @@ bend_surface *bendGLWidget::adjustDeployWorkpiece(fileOperate *pData)
 {
     pDrawData = pData;//由bendgl中对象接受，继续操作数据
 
-        /**********************计算垂直于钣金上表面，方向朝外的法向量***************/
-        point3f frontCeneter,backCenter,normalVector;
-        frontCeneter = pDrawData->findBasicData(false);
-        backCenter = pDrawData->findBackBasicData(false);
-        normalVector.x = backCenter.x - frontCeneter.x;
-        normalVector.y = backCenter.y - frontCeneter.y;
-        normalVector.z = backCenter.z - frontCeneter.z;
-        qDebug()<<"法向量坐标：X"<<normalVector.x<<"  Y"<<normalVector.y<<"  Z"<<normalVector.z;
-        /*****************************根据求得的法向量来变换钣金件，使得平行于地面**********************/
-        if(normalVector.z > 0.5)
+        if(isFirstLoad)
         {
-            //绕X轴旋转-90度
-            xform_type rotateMatrix;
-            rotateMatrix.R11 = 1;
-            rotateMatrix.R12 = 0;
-            rotateMatrix.R13 = 0;
-            rotateMatrix.R21 = 0;
-            rotateMatrix.R22 = 0;
-            rotateMatrix.R23 = 1;
-            rotateMatrix.R31 = 0;
-            rotateMatrix.R32 = -1;
-            rotateMatrix.R33 = 0;
-            rotateMatrix.T1 = 0;
-            rotateMatrix.T2 = 0;
-            rotateMatrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotateMatrix,false);
-        }
-        else if(normalVector.z < -0.5)
-        {
-            //绕x轴旋转90度
-            xform_type rotateMatrix;
-            rotateMatrix.R11 = 1;
-            rotateMatrix.R12 = 0;
-            rotateMatrix.R13 = 0;
-            rotateMatrix.R21 = 0;
-            rotateMatrix.R22 = 0;
-            rotateMatrix.R23 = -1;
-            rotateMatrix.R31 = 0;
-            rotateMatrix.R32 = 1;
-            rotateMatrix.R33 = 0;
-            rotateMatrix.T1 = 0;
-            rotateMatrix.T2 = 0;
-            rotateMatrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotateMatrix,false);
-        }
-        else if(normalVector.x > 0.5)
-        {
-            //绕z轴旋转90度
-            xform_type rotateMatrix;
-            rotateMatrix.R11 = 0;
-            rotateMatrix.R12 = -1;
-            rotateMatrix.R13 = 0;
-            rotateMatrix.R21 = 1;
-            rotateMatrix.R22 = 0;
-            rotateMatrix.R23 = 0;
-            rotateMatrix.R31 = 0;
-            rotateMatrix.R32 = 0;
-            rotateMatrix.R33 = 1;
-            rotateMatrix.T1 = 0;
-            rotateMatrix.T2 = 0;
-            rotateMatrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotateMatrix,false);
-        }
-        else if(normalVector.x < -0.5)
-        {
-            //绕z轴旋转-90度
-            xform_type rotateMatrix;
-            rotateMatrix.R11 = 0;
-            rotateMatrix.R12 = 1;
-            rotateMatrix.R13 = 0;
-            rotateMatrix.R21 = -1;
-            rotateMatrix.R22 = 0;
-            rotateMatrix.R23 = 0;
-            rotateMatrix.R31 = 0;
-            rotateMatrix.R32 = 0;
-            rotateMatrix.R33 = 1;
-            rotateMatrix.T1 = 0;
-            rotateMatrix.T2 = 0;
-            rotateMatrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotateMatrix,false);
-        }
-        else if(normalVector.y < -0.5)
-        {
-            //绕x轴旋转180度
-            xform_type rotateMatrix;
-            rotateMatrix.R11 = 1;
-            rotateMatrix.R12 = 0;
-            rotateMatrix.R13 = 0;
-            rotateMatrix.R21 = 0;
-            rotateMatrix.R22 = -1;
-            rotateMatrix.R23 = 0;
-            rotateMatrix.R31 = 0;
-            rotateMatrix.R32 = 0;
-            rotateMatrix.R33 = -1;
-            rotateMatrix.T1 = 0;
-            rotateMatrix.T2 = 0;
-            rotateMatrix.T3 = 0;
-            pDrawData->adjustWorkpiece(rotateMatrix,false);
-        }
-        else if(normalVector.y > 0.5)
-        {
-            //是想要的姿态，do nothing
-        }
+            /**********************计算垂直于钣金上表面，方向朝外的法向量***************/
+            point3f frontCeneter,backCenter,normalVector;
+            frontCeneter = pDrawData->findBasicData(false);
+            backCenter = pDrawData->findBackBasicData(false);
+            normalVector.x = backCenter.x - frontCeneter.x;
+            normalVector.y = backCenter.y - frontCeneter.y;
+            normalVector.z = backCenter.z - frontCeneter.z;
+            qDebug()<<"法向量坐标：X"<<normalVector.x<<"  Y"<<normalVector.y<<"  Z"<<normalVector.z;
+            /*****************************根据求得的法向量来变换钣金件，使得平行于地面**********************/
+            if(0==normalVector.x && normalVector.y>0 && 0==normalVector.z )
+            {
 
+            }
+            else if(normalVector.x!=0 || normalVector.y!=0 || normalVector.z!=0)
+            {
+                /*先求绕X轴旋转的角度和矩阵*/
+                float RotateXangle = 0 - atan2(normalVector.z,normalVector.y);
+                qDebug()<<"绕X轴旋转的角度：X"<<RotateXangle*180/M_PI;
+                xform_type rotate_X_Matrix;
+                rotate_X_Matrix.R11 = 1;
+                rotate_X_Matrix.R12 = 0;
+                rotate_X_Matrix.R13 = 0;
+                rotate_X_Matrix.R21 = 0;
+                rotate_X_Matrix.R22 = cos(RotateXangle);
+                rotate_X_Matrix.R23 = -sin(RotateXangle);
+                rotate_X_Matrix.R31 = 0;
+                rotate_X_Matrix.R32 = sin(RotateXangle);
+                rotate_X_Matrix.R33 = cos(RotateXangle);
+                rotate_X_Matrix.T1 = 0;
+                rotate_X_Matrix.T2 = 0;
+                rotate_X_Matrix.T3 = 0;
+                pDrawData->adjustWorkpiece(rotate_X_Matrix,true);
+                pDrawData->adjustWorkpiece(rotate_X_Matrix,false);
+
+                /*再求绕Z轴旋转的角度和矩阵*/
+                float length = sqrt(normalVector.y*normalVector.y+normalVector.z*normalVector.z);
+                if(normalVector.y<0)
+                    length = -length;
+                float RotateZangle = atan2(normalVector.x,length);
+                qDebug()<<"绕Z轴旋转的角度：Z"<<RotateZangle*180/M_PI;
+                xform_type rotate_Z_Matrix;
+                rotate_Z_Matrix.R11 = cos(RotateZangle);
+                rotate_Z_Matrix.R12 = -sin(RotateZangle);
+                rotate_Z_Matrix.R13 = 0;
+                rotate_Z_Matrix.R21 = sin(RotateZangle);
+                rotate_Z_Matrix.R22 = cos(RotateZangle);
+                rotate_Z_Matrix.R23 = 0;
+                rotate_Z_Matrix.R31 = 0;
+                rotate_Z_Matrix.R32 = 0;
+                rotate_Z_Matrix.R33 = 1;
+                rotate_Z_Matrix.T1 = 0;
+                rotate_Z_Matrix.T2 = 0;
+                rotate_Z_Matrix.T3 = 0;
+                pDrawData->adjustWorkpiece(rotate_Z_Matrix,true);
+                pDrawData->adjustWorkpiece(rotate_Z_Matrix,false);
+            }
+            isFirstLoad = false;
+        }
         return pDrawData->getDeployHead();
 }
 

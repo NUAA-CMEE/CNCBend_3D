@@ -1239,16 +1239,18 @@ bend_surface *fileReader::getWorkPieceInfo(trimmed_surface_type *pTrimmed)
     //因为钣金工件的厚度是一致的，所以上下面的是完全相同的，
     //因而通过这一个性质可以得到钣金工件相互平行的各个面`
     pBendTmp = pHead;
-    while (pBendTmp) {
+    while (pBendTmp)
+    {
         if(pBendTmp->pParallel != NULL)
         {
             pBendTmp = pBendTmp->pNext;
             continue;
         }
         bend_surface *ptmp = pHead;
-        while(ptmp){
+        while(ptmp)
+        {
             if(pBendTmp == ptmp || ptmp->pParallel != NULL || \
-                    !judgeLineEqual(&pBendTmp->axis,&ptmp->axis))
+                    !judgeLineEqual(&pBendTmp->axis,&ptmp->axis)) //相同或是已经有平行面
             {
                 ptmp = ptmp->pNext;
                 continue;
@@ -1278,6 +1280,7 @@ bend_surface *fileReader::getWorkPieceInfo(trimmed_surface_type *pTrimmed)
         }
         pBendTmp = pBendTmp->pNext;
     }
+
     //为折弯面做顺序标记,并且重新定位折弯数据指针，结点数量为折弯点个数
     bend_surface *phead_tmp = NULL;
     bend_surface *plast_tmp = NULL;
