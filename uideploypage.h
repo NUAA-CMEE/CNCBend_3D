@@ -30,7 +30,6 @@ private:
     bend_surface *pBendHead;
     bend_order *pOrderHead;
     float maxLength;
-    float K ; //根据钣金基面最大长度确定二维展开图的缩放比例K
 
     float xRote,yRote,zRote;
     float zoom,vMove,hMove;

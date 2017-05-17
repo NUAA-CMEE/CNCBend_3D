@@ -250,10 +250,6 @@
            <property name="text">
             <string>轴侧图</string>
            </property>
-           <property name="icon">
-            <iconset resource="resource.qrc">
-             <normaloff>:/images/resource/Micon.PNG</normaloff>:/images/resource/Micon.PNG</iconset>
-           </property>
           </widget>
          </item>
          <item>

@@ -15,8 +15,8 @@ GLfloat SelectColor[4] = {1.0,0.0,0.0,1.0};     //下模颜色
 GLfloat backgaung_rColor[4] = {0.2,0.8,0.2,1.0};  //后挡料颜色
 GLfloat backgaung_xColor[4] = {0.8,0.8,0.5,1.0};  //后挡料颜色
 GLfloat backgaung_zColor[4] = {0.3,0.2,0.3,1.0};  //后挡料颜色
-GLfloat workpieceColor[4] = {1.0,0.6,0.2,1.0};  //工件颜色
-GLfloat bac_workpieceColor[4] = {0.0,0.75,1.0,1.0};  //工件颜色
+GLfloat workpieceColor[4] = {0.0,0.75,1.0,1.0};  //工件颜色
+GLfloat bac_workpieceColor[4] = {1.0,0.6,0.2,1.0};  //工件颜色1.0,0.6,0.2,1.0
 GLfloat bendColor[3] = {0.8,0.0,0.0};//折弯颜色
 
 void CALLBACK vertexCallback(GLvoid *vertex)
@@ -2958,21 +2958,23 @@ point3f fileOperate::findBasicData(bool isbendDataFlow)
 point3f fileOperate::findBackBasicData(bool isbendDataFlow)
 {
     bend_surface *pbend ;
+    bend_surface *pbend2 ;
     if(isbendDataFlow)
     {
-       pbend = pBendHead->pParallel;
+       pbend = pBendHead;
     }
     else
     {
-        pbend = pDeployHead->pParallel;
+        pbend = pDeployHead;
     }
 
     int max = 0;
     basic_surface *result = NULL;  //要找出的面积最大（数据量最大的基面）
     while(pbend)
     {
-        basic_surface *pleft = pbend->pLeftBase;
-        basic_surface *pright = pbend->pRightBase;
+        pbend2 = pbend->pParallel;
+        basic_surface *pleft = pbend2->pLeftBase;
+        basic_surface *pright = pbend2->pRightBase;
         if(pleft->pBendSurface.size() > max)
         {
             max = pleft->pBendSurface.size();
